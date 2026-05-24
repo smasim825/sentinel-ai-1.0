@@ -1,0 +1,68 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "sentinel-98231",
+          "appId": "1:189051738040:android:16eb4895fd8164aa80614d",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "sentinel-98231",
+          "configurations": {
+            "android": "1:189051738040:android:16eb4895fd8164aa80614d",
+            "ios": "1:189051738040:ios:d37335c3700fb4bc80614d",
+            "web": "1:189051738040:web:65d956bca50d177f80614d"
+          }
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "sentinel-98231",
+          "appId": "1:189051738040:ios:d37335c3700fb4bc80614d",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
+}

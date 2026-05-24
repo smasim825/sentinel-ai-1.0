@@ -1,0 +1,19 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // 🔴 SOS Audio Evidence Rules
+    match /sos_audio/{userId}/{allPaths=**} {
+      // Allow the victim to upload their own audio
+      allow write: if request.auth != null && request.auth.uid == userId;
+      
+      // Allow anyone with the link to listen (so guardians can hear it instantly)
+      allow read: if true; 
+    }
+    
+    // Default rule for other files (like profile photos)
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
